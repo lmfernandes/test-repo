@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+	<variable name="HOME_LOG" value="logs" />
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+		</encoder>
+	</appender>
+	<root level="info">
+		<appender-ref ref="STDOUT" />
+	</root>
+	<appender name="MESSAGE_PRODUCER_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${HOME_LOG}/message_producer.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${HOME_LOG}/message_producer.%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+		</rollingPolicy>
+		<encoder>
+			<Pattern>%d{yyyyMMdd HH:mm:ss.SSS} %-5level [%marker] [%mdc] %logger{36} - %msg%n</Pattern>
+		</encoder>
+	</appender>
+	<appender name="MESSAGE_CONSUMER_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${HOME_LOG}/message_consumer.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${HOME_LOG}/message_consumer.%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+		</rollingPolicy>
+		<encoder>
+			<Pattern>%d{yyyyMMdd HH:mm:ss.SSS} %-5level [%marker] [%mdc] %logger{36} - %msg%n</Pattern>
+		</encoder>
+	</appender>
+	<logger name="com.challenge1.item.services.messaging.Producer" level="info" additivity="false">
+		<appender-ref ref="MESSAGE_PRODUCER_FILE"/>
+	</logger>
+	<logger name="com.challenge1.item.components.TopicConsumer" level="info" additivity="false">
+		<appender-ref ref="MESSAGE_CONSUMER_FILE"/>
+	</logger>
+</configuration>

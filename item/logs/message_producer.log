@@ -1,0 +1,2 @@
+20220130 23:28:08.533 INFO  [] [] c.c.item.services.messaging.Producer - #### -> Producing message -> Added 2 items  from items
+20220130 23:28:17.675 INFO  [] [] c.c.item.services.messaging.Producer - #### -> Producing message -> Failed to add 2 items from DEFAULT
